@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,20 +20,18 @@ namespace VeloShopApp.Pages
     /// <summary>
     /// Логика взаимодействия для ClientPage.xaml
     /// </summary>
-    public partial class ClientPage : Page
+    public partial class AdminPage: Page
     {
         private readonly MainWindow mainWindow;
         private readonly VeloShopDataSet.UserRow user;
-        ProductTableAdapter products;
-        List<VeloShopDataSet.ProductRow> productsInCart;
-        public ClientPage(MainWindow mainWindow, VeloShopDataSet.UserRow user)
+        ProductTableAdapter products;        
+        public AdminPage(MainWindow mainWindow, VeloShopDataSet.UserRow user)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
             this.user = user;
             products = new ProductTableAdapter();
-            tbUsername.Text = $"{user.Surname} {user.Name}";
-            productsInCart = new List<VeloShopDataSet.ProductRow>();           
+            tbUsername.Text = $"{user.Surname} {user.Name}";            
             UpdateListView();
         }
 
@@ -78,20 +77,7 @@ namespace VeloShopApp.Pages
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new AuthPage(mainWindow));
-        }
-
-        private void btnAddToOrder_Click(object sender, RoutedEventArgs e)
-        {
-            productsInCart.Add((sender as Button).DataContext as VeloShopDataSet.ProductRow);
-            if (productsInCart.Count > 0)
-            {
-                btnOrder.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                btnOrder.Visibility = Visibility.Collapsed;
-            }
-        }
+        }        
 
         private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -105,6 +91,34 @@ namespace VeloShopApp.Pages
 
         private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            UpdateListView();
+        }
+
+        private void btnAddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new AddProductPage(mainWindow));
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var product = ((sender as Button).DataContext as VeloShopDataSet.ProductRow);
+            
+            var orders = new OrderProductTableAdapter();
+            var productInOrder = orders.GetData().ToList().FirstOrDefault(order => order.ProductId == product.Id);
+            if (productInOrder == null)
+            {               
+                products.DeleteQuery(product.Id);
+            }
+            else
+            {
+                MessageBox.Show("Данный товар нельзя удалить, так как он находится в заказе");
+            }
+            
             UpdateListView();
         }
     }

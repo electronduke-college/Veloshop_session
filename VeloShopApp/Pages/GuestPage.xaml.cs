@@ -27,8 +27,7 @@ namespace VeloShopApp.Pages
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
-            products = new ProductTableAdapter();
-            var data = products.GetData().ToList();
+            products = new ProductTableAdapter();           
             UpdateListView();
 
         }
@@ -56,7 +55,7 @@ namespace VeloShopApp.Pages
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.GoBack();
         }
     }
 }

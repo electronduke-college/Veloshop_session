@@ -9,6 +9,71 @@
       Title="ClientPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Style="{StaticResource text}" Text="Магазини велосипедов"/>
+            <Button Name="btnExit" Content="Выйти" Style="{StaticResource mainBtn}" 
+                    Margin="10 0" Click="btnExit_Click"                  
+                    Padding="10 10"
+                    VerticalAlignment="Center"/>
+        </StackPanel>
+        <TextBlock Style="{StaticResource text}" Name="tbUsername" Text="Фамилия Имя" HorizontalAlignment="Right" Margin="0 0 10 0"/>
+        <DockPanel Grid.Row="1">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                <TextBlock Style="{StaticResource text}"                            
+                           Name="tbCount" Text="43 из 43"/>
+
+                <TextBlock Style="{StaticResource text}" Margin="10 0"                            
+                           Text="Поиск:"/>
+                <TextBox Width="140" Name="tbSearch" TextChanged="tbSearch_TextChanged" Text="" VerticalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS"/>
+
+                <TextBlock Style="{StaticResource text}" Margin="10 0"                            
+                           Text="Сортировака: "/>
+                <ComboBox Width="140" Name="cbSort" SelectionChanged="cbSort_SelectionChanged" VerticalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS">
+                    <ComboBoxItem Content="По возрастанию цены"/>
+                    <ComboBoxItem Content="По убыванию цены"/>
+                </ComboBox>
+
+                <Button Content="Корзина" Name="btnOrder" Visibility="Collapsed"
+                        Click="btnOrder_Click" Style="{StaticResource mainBtn}" Padding="10 5" Margin="10 5"/>
+            </StackPanel>
+            <ListView DockPanel.Dock="Bottom" Name="lwProducts">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ListViewItem BorderBrush="DarkBlue" BorderThickness="2" >
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Image}" Width="200"/>
+
+                                <StackPanel Orientation="Vertical" Margin="15 0" Width="400">
+                                    <TextBlock Style="{StaticResource text}" FontWeight="Bold" Text="{Binding Name}" FontSize="16"/>
+                                    <TextBlock Style="{StaticResource text}" Text="{Binding Description}" Margin="0 5"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Производитель: " Style="{StaticResource text}"/>
+                                        <TextBlock Style="{StaticResource text}" Text="{Binding ManufacturerName}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                                        <TextBlock Text="Цена: " Style="{StaticResource text}"/>
+                                        <TextBlock Style="{StaticResource text}" Text="{Binding Price}"/>
+                                        <TextBlock Text=" руб." Style="{StaticResource text}"/>
+                                    </StackPanel>
+
+                                    <Button Content="Добавить в заказ" Style="{StaticResource mainBtn}" 
+                                            Padding="10 5" Name="btnAddToOrder" Click="btnAddToOrder_Click"
+                                            HorizontalAlignment="Left"/>
+                                </StackPanel>
+                                <Border BorderBrush="DarkBlue" BorderThickness="1"/>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="120">
+                                    <TextBlock Text="Кол-во на складе" Style="{StaticResource text}"  HorizontalAlignment="Center"/>
+                                    <TextBlock Style="{StaticResource text}" Text="{Binding Count}" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </ListViewItem>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DockPanel>
     </Grid>
 </Page>

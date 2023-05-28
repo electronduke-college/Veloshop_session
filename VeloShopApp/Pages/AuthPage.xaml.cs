@@ -27,6 +27,7 @@ namespace VeloShopApp.Pages
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
+            userTableAdapter = new UserTableAdapter();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -41,7 +42,15 @@ namespace VeloShopApp.Pages
             }
             else
             {
-                this.NavigationService.Navigate(new ClientPage(mainWindow, user));
+                if(user.RoleId == 3)
+                {
+                    this.NavigationService.Navigate(new ClientPage(mainWindow, user));
+                }
+                else if(user.RoleId == 1)
+                {
+                    this.NavigationService.Navigate(new AdminPage(mainWindow, user));
+                }
+                
             }
         }
 

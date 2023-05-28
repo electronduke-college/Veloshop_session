@@ -21,3 +21,7 @@ C:\Users\gpav5\source\repos\VeloShopApp\VeloShopApp\obj\Debug\VeloShopApp.csproj
 C:\Users\gpav5\source\repos\VeloShopApp\VeloShopApp\obj\Debug\VeloShopApp.csproj.CoreCompileInputs.cache
 C:\Users\gpav5\source\repos\VeloShopApp\VeloShopApp\obj\Debug\VeloShopApp.exe
 C:\Users\gpav5\source\repos\VeloShopApp\VeloShopApp\obj\Debug\VeloShopApp.pdb
+C:\Users\gpav5\source\repos\VeloShopApp\VeloShopApp\obj\Debug\Pages\AdminPage.g.cs
+C:\Users\gpav5\source\repos\VeloShopApp\VeloShopApp\obj\Debug\Pages\AdminPage.baml
+C:\Users\gpav5\source\repos\VeloShopApp\VeloShopApp\obj\Debug\Pages\AddProductPage.g.cs
+C:\Users\gpav5\source\repos\VeloShopApp\VeloShopApp\obj\Debug\Pages\AddProductPage.baml
