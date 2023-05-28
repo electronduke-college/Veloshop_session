@@ -24,10 +24,13 @@ namespace VeloShopApp.Pages
         private readonly MainWindow mainWindow;
         ManufacturerTableAdapter manufacturer;
         ProductTableAdapter products;
-        public AddProductPage(MainWindow mainWindow)
+        private readonly VeloShopDataSet.UserRow user;
+
+        public AddProductPage(MainWindow mainWindow, VeloShopDataSet.UserRow user)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
+            this.user = user;
             manufacturer = new ManufacturerTableAdapter();
             products = new ProductTableAdapter();   
             cbManufacturer.ItemsSource = manufacturer.GetData().ToList();
@@ -97,9 +100,15 @@ namespace VeloShopApp.Pages
             else
             {
                 products.InsertQuery(name, description, "", manufacturerId, price, discount, count);
+                this.NavigationService.Navigate(new AdminPage(mainWindow, user));
             }
 
 
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
         }
     }
 }

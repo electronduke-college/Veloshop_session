@@ -64,6 +64,10 @@
             <Button Content="Добавить товар" Style="{StaticResource mainBtn}" 
                     Name="btnAddProduct" Click="btnAddProduct_Click"
                     HorizontalAlignment="Center" Padding="20 10" Margin="0 20 0 0"/>
+            <Button Content="Отмена" Style="{StaticResource mainBtn}" 
+                    Name="btnBack" Click="btnBack_Click"
+                    HorizontalAlignment="Center" Padding="20 10" Margin="0 20 0 0"/>
+            
 
         </StackPanel>      
     </Grid>

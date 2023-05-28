@@ -96,7 +96,7 @@ namespace VeloShopApp.Pages
 
         private void btnAddProduct_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new AddProductPage(mainWindow));
+            this.NavigationService.Navigate(new AddProductPage(mainWindow, user));
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
