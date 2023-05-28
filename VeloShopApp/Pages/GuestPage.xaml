@@ -1,0 +1,61 @@
+﻿<Page x:Class="VeloShopApp.Pages.GuestPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VeloShopApp.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800" Background="White"
+      Title="GuestPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Style="{StaticResource text}" Text="Магазини велосипедов"/>
+            <Button Name="btnBack" Content="Авторизоваться" Style="{StaticResource mainBtn}" 
+                    Margin="10 0" Click="btnBack_Click"                  
+                    Padding="10 10"
+                    VerticalAlignment="Center"/>
+        </StackPanel>
+        <DockPanel Grid.Row="1">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                <TextBlock Style="{StaticResource text}"                            
+                           Name="tbCount"/>
+            </StackPanel>
+            <ListView DockPanel.Dock="Bottom" Name="lwProducts">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ListViewItem BorderBrush="DarkBlue" BorderThickness="2">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Image}" Width="200"/>
+
+                                <StackPanel Orientation="Vertical" Margin="15 0">
+                                    <TextBlock Style="{StaticResource text}" FontWeight="Bold" Text="{Binding Name}" FontSize="16"/>
+                                    <TextBlock Style="{StaticResource text}" Text="{Binding Description}" Margin="0 5"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Производитель: " Style="{StaticResource text}"/>
+                                        <TextBlock Style="{StaticResource text}" Text="{Binding Manufacturer}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                                        <TextBlock Text="Цена: " Style="{StaticResource text}"/>
+                                        <TextBlock Style="{StaticResource text}" Text="{Binding Price}"/>
+                                        <TextBlock Text=" руб." Style="{StaticResource text}"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Кол-во на складе:" Style="{StaticResource text}"/>
+                                    <TextBlock Style="{StaticResource text}" Text="{Binding Count}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </ListViewItem>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DockPanel>
+        
+    </Grid>
+</Page>

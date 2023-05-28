@@ -12,19 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using VeloShopApp.Pages;
 
-namespace VeloShopApp
+namespace VeloShopApp.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ClientPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ClientPage : Page
     {
-        public MainWindow()
+        private readonly MainWindow mainWindow;
+        private readonly VeloShopDataSet.UserRow user;
+        public ClientPage(MainWindow mainWindow, VeloShopDataSet.UserRow user)
         {
             InitializeComponent();
-            mainFrame.Navigate(new AuthPage(this));
+            this.mainWindow = mainWindow;
+            this.user = user;   
         }
     }
 }

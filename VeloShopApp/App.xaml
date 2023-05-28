@@ -4,6 +4,25 @@
              xmlns:local="clr-namespace:VeloShopApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <Style x:Key="text" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontFamily" Value="Comic Sans MS"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="mainBtn" TargetType="Button">
+                <Setter Property="FontFamily" Value="Comic Sans MS"/>
+                <Setter Property="Background" Value="DarkBlue"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
+
+            <Style x:Key="subBtn" TargetType="Button">
+                <Setter Property="FontFamily" Value="Comic Sans MS"/>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderBrush" Value="DarkBlue"/>
+                <Setter Property="BorderThickness" Value="2"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
