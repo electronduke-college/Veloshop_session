@@ -100,7 +100,7 @@ namespace VeloShopApp.Pages
 
         private void btnOrder_Click(object sender, RoutedEventArgs e)
         {
-            OrderWindow orderWindow = new OrderWindow(mainWindow, productsInCart);
+            OrderWindow orderWindow = new OrderWindow(mainWindow, productsInCart, user);
 
             if (orderWindow.ShowDialog().Equals(true))
             {

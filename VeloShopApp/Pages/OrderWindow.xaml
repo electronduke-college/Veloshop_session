@@ -33,20 +33,27 @@
 
 
             </StackPanel>
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
-                <TextBlock Text="Итог: " Style="{StaticResource text}" FontSize="16" FontWeight="Bold"/>
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Bottom">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Пункт выдачи: " Style="{StaticResource text}" FontSize="16" FontWeight="Bold"/>
+                    <ComboBox Name="cbPoints" Width="200" FontFamily="Comic Sans MS"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Итог: " Style="{StaticResource text}" FontSize="16" FontWeight="Bold"/>
 
-                <TextBlock Text="12412" Name="tbOldPrice" Style="{StaticResource text}" FontSize="16" FontWeight="Bold" TextDecorations="Strikethrough"/>
-                <TextBlock Text=" руб." Style="{StaticResource text}" FontSize="16" FontWeight="Bold" TextDecorations="Strikethrough"/>
+                    <TextBlock Text="12412" Name="tbOldPrice" Style="{StaticResource text}" FontSize="16" FontWeight="Bold" TextDecorations="Strikethrough"/>
+                    <TextBlock Text=" руб." Style="{StaticResource text}" FontSize="16" FontWeight="Bold" TextDecorations="Strikethrough"/>
 
-                <TextBlock Margin="15 0 0 0" Text="12412" Name="tbNewPrice" Style="{StaticResource text}" FontSize="16" FontWeight="Bold" />
-                <TextBlock Text=" руб." Style="{StaticResource text}" FontSize="16" FontWeight="Bold"/>
+                    <TextBlock Margin="15 0 0 0" Text="12412" Name="tbNewPrice" Style="{StaticResource text}" FontSize="16" FontWeight="Bold" />
+                    <TextBlock Text=" руб." Style="{StaticResource text}" FontSize="16" FontWeight="Bold"/>
 
-                <Button Content="Сделать заказ" DockPanel.Dock="Bottom" Style="{StaticResource mainBtn}"
+                    <Button Content="Сделать заказ" DockPanel.Dock="Bottom" Style="{StaticResource mainBtn}"
                      Padding="15 5" Margin="10 5" HorizontalAlignment="Left"
                     Name="btnMakeOrder" Click="btnMakeOrder_Click"
                     />
+                </StackPanel>
             </StackPanel>
+            
             <ListView DockPanel.Dock="Bottom" Name="lwProducts">
                 <ListView.ItemTemplate>
                     <DataTemplate>
