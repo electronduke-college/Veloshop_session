@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,35 +12,37 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using VeloShopApp.VeloShopDataSetTableAdapters;
 
 namespace VeloShopApp.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для ClientPage.xaml
+    /// Логика взаимодействия для OrderWindow.xaml
     /// </summary>
-    public partial class ClientPage : Page
+    public partial class OrderWindow : Window
     {
         private readonly MainWindow mainWindow;
-        private readonly VeloShopDataSet.UserRow user;
-        ProductTableAdapter products;
-        List<VeloShopDataSet.ProductRow> productsInCart;
-        public ClientPage(MainWindow mainWindow, VeloShopDataSet.UserRow user)
+        private List<VeloShopDataSet.ProductRow> products;
+        public OrderWindow(MainWindow mainWindow, List<VeloShopDataSet.ProductRow> products)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
-            this.user = user;
-            products = new ProductTableAdapter();
-            tbUsername.Text = $"{user.Surname} {user.Name}";
-            productsInCart = new List<VeloShopDataSet.ProductRow>();           
+            this.products = products;
             UpdateListView();
         }
 
         private void UpdateListView()
         {
-            var list = products.GetData().ToList();
+
+            if (products.Count > 0)
+            {
+                btnMakeOrder.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnMakeOrder.Visibility = Visibility.Collapsed;
+            }
+            var list = products;
 
             if (tbSearch.Text != "")
             {
@@ -58,8 +62,27 @@ namespace VeloShopApp.Pages
             }
 
             list = UpdateProductPhoto(list);
-            tbCount.Text = $"{list.Count} из {products.GetData().ToList().Count}";
+            tbCount.Text = $"{list.Count} из {products.Count}";
             lwProducts.ItemsSource = list;
+            lwProducts.Items.Refresh();
+            decimal fullPrice = 0;
+            decimal newPrice = 0;
+
+            products.ForEach(item => fullPrice += item.Price);
+            products.ForEach(item =>
+            {
+                if (item.DiscountAmount != 0)
+                {
+                    newPrice += item.Price - (item.Price / 100 * item.DiscountAmount);
+                }
+                else
+                {
+                    newPrice += item.Price;
+                }
+            });
+            tbOldPrice.Text = fullPrice.ToString();
+            tbNewPrice.Text = newPrice.ToString();
+
         }
 
         private List<VeloShopDataSet.ProductRow> UpdateProductPhoto(List<VeloShopDataSet.ProductRow> data)
@@ -75,40 +98,28 @@ namespace VeloShopApp.Pages
             return data;
         }
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)
+        private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new AuthPage(mainWindow));
+            this.Close();
         }
 
-        private void btnAddToOrder_Click(object sender, RoutedEventArgs e)
+        private void btnMakeOrder_Click(object sender, RoutedEventArgs e)
         {
-            productsInCart.Add((sender as Button).DataContext as VeloShopDataSet.ProductRow);
-            if (productsInCart.Count > 0)
-            {
-                btnOrder.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                btnOrder.Visibility = Visibility.Collapsed;
-            }
+
         }
 
-        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            products.Remove(products.Where(item => item == ((sender as Button).DataContext as VeloShopDataSet.ProductRow)).First());
+            UpdateListView();
+        }
+
+        private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateListView();
         }
 
-        private void btnOrder_Click(object sender, RoutedEventArgs e)
-        {
-            OrderWindow orderWindow = new OrderWindow(mainWindow, productsInCart);
-
-            if (orderWindow.ShowDialog().Equals(true))
-            {
-                Console.WriteLine("Dialog is open");
-            }
-        }
-
-        private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateListView();
         }

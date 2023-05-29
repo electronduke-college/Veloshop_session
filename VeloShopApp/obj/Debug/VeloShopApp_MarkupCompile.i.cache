@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\gpav5\source\repos\VeloShopApp\VeloShopApp\App.xaml
-6-1175915886
+71198693156
 
-13-1240658534
+14-754785424
 13-38814620
-MainWindow.xaml;Pages\AddProductPage.xaml;Pages\AdminPage.xaml;Pages\AuthPage.xaml;Pages\ClientPage.xaml;Pages\GuestPage.xaml;
+MainWindow.xaml;Pages\AddProductPage.xaml;Pages\AdminPage.xaml;Pages\AuthPage.xaml;Pages\ClientPage.xaml;Pages\GuestPage.xaml;Pages\OrderWindow.xaml;
 
 True
 

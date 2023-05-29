@@ -67,6 +67,9 @@
     <Compile Include="Pages\GuestPage.xaml.cs">
       <DependentUpon>GuestPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\OrderWindow.xaml.cs">
+      <DependentUpon>OrderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VeloShopDataSet.cs">
       <DependentUpon>VeloShopDataSet.xsd</DependentUpon>
     </Compile>
@@ -104,6 +107,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\GuestPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\OrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
